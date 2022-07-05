@@ -1,3 +1,4 @@
+using API.Helpers;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(x => x.UseSqlite(
     builder.Configuration.GetConnectionString("DefaultConnection")
 ));
+
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
@@ -48,6 +51,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();
